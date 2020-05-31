@@ -1,0 +1,94 @@
+# For the benefit of emacs users: -*- shell-script -*-
+#
+#  _ _____ _     _            _
+# (_)___ /| |__ | | ___   ___| | _____
+# | | |_ \| '_ \| |/ _ \ / __| |/ / __|
+# | |___) | |_) | | (_) | (__|   <\__ \
+# |_|____/|_.__/|_|\___/ \___|_|\_\___/
+
+align=center
+separator=false
+color=#ffffff
+separator_block_width=10
+markup=pango
+
+
+#[window title]
+#command=xdotool getactivewindow getwindowname
+#interval=3
+#color=#A6D1FA
+#min_width=900
+#align=left
+
+# Print click data
+#[menu button]
+#align=center
+#full_text=Click me!
+#min_width=Button=? x=? y=?
+#command=rofi -show-icons -show drun >/dev/null 2>&1 &
+
+[arch-update]
+command=checkupdates | wc -l
+interval=once
+label=<span color="#ff79c6"> </span>
+
+[battery]
+command=~/.config/i3blocks/blocks/battery2/battery2
+interval=2
+color=#50fa7b
+
+[iface]
+command=~/.config/i3blocks/blocks/iface/iface
+#LABEL=wlan0:
+IFACE=wlan0
+#ADDRESS_FAMILY=inet6?
+color=#50fa7b
+interval=10
+label=Net: 
+
+#[public-ip]
+#command=wget -qO - icanhazip.com
+#label=Pub: 
+#interval=once
+#markup=pango
+
+#[cpu_usage]
+#command=~/.config/i3blocks/blocks/cpu_usage/cpu_usage
+#interval=2
+#label=CPU:
+
+#[memory]
+#command=free -h --si | awk 'FNR==2{ print $0 }' | awk '{ print $7 }'
+#interval=2
+#label=<span color="#a9e185">Mem: </span>
+
+[date]
+command=date '+%A %d %B %C'
+interval=60
+label=<span color="#ff79c6"> </span>
+
+[time]
+command=date '+%I:%M:%S%p'
+interval=1
+#label=<span color="#ff79c6"> </span>
+
+
+### currently using volumeicon - systemtray so the section is redundant.
+#[volume]
+#command=~/.config/i3blocks/blocks/volume/volume
+##LABEL=♪ 
+#LABEL=VOL 
+#color=#50fa7b
+#interval=5
+#signal=10
+##STEP=5%
+##MIXER=[determined automatically]
+##SCONTROL=[determined automatically]
+
+#[Custom Text]
+#full_text=<span foreground="#ff79c6" size="large">Arch Linux</span>
+#min_width=100
+#align=left#markup=pango
+#background=#FF0000
+
+
