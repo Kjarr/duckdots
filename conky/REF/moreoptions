@@ -1,0 +1,141 @@
+#----------------------------------------------------------------------------------------------------------------------------------------
+#					           Music Player
+#----------------------------------------------------------------------------------------------------------------------------------------
+${alignc}${color 2E70AA}${voffset 17}Now Playing:
+${alignc}${color 828282}${voffset 1}${execi 5 bash ~/.conky/scripts/spotify.sh}
+${color 2E70AA}${hr 1}
+#----------------------------------------------------------------------------------------------------------------------------------------
+#					         Download Circles
+#----------------------------------------------------------------------------------------------------------------------------------------
+${color 828282}${goto 19}${voffset 42}${execi 5 bash ~/.conky/scripts/nzbget.sh}
+${color 828282}${goto 17}${voffset 27}Usenet
+${color 828282}${goto 81}${voffset -52}${execi 5 bash ~/.conky/scripts/transmission.sh}
+${color 828282}${goto 80}${voffset 27}Torrent
+#----------------------------------------------------------------------------------------------------------------------------------------
+#					         Battery Circle 
+#----------------------------------------------------------------------------------------------------------------------------------------
+${color 828282}${goto 149}${voffset -53}${battery_percent BAT1}%
+${color 828282}${goto 142}${voffset 27}Battery
+#----------------------------------------------------------------------------------------------------------------------------------------
+#						Weather 
+#----------------------------------------------------------------------------------------------------------------------------------------
+${font conkyweather:size=35}${color 2E70AA}${goto 200}${voffset -75}${execpi 1800  sed -n '2p' ~/.conky/scripts/accu_weather/rss/weather}$color${font}${font Radio Space:size=9}${color 828282}${goto 202}${voffset 12}
+${execi 600 bash ~/.conky/scripts/accu_weather/rss/acc_rss}${font Radio Space:size=15}${goto 204}${voffset -8}${execpi 600 sed -n '1p' ~/.conky/scripts/accu_weather/rss/weather|awk '{print $NF}' | sed -e 's/C/°/i'}${font}$color
+#----------------------------------------------------------------------------------------------------------------------------------------
+#					           CPU usage 
+#----------------------------------------------------------------------------------------------------------------------------------------
+${color #2E70AA}${hr 1}
+${color #828282}${voffset 8}Temp: $color ${acpitemp}°
+${color #828282}Uptime: ${uptime_short}
+${color #828282}Updates:$color ${execi 1800 checkupdates | wc -l}
+${color #828282}WiFi Q: $color  ${wireless_link_qual_perc wlo1}%${goto 116}${voffset -10}${cpu cpu0}% ${color 828282}${goto 116}${voffset 12}CPU1$color${goto 191}${voffset -10}${cpu cpu1}% ${color 828282}${goto 191}${voffset 12}CPU2$color
+#----------------------------------------------------------------------------------------------------------------------------------------
+#						Network
+#----------------------------------------------------------------------------------------------------------------------------------------
+${color 2E70AA}${voffset 0}${hr 1}
+${color 828282}${voffset 2}wan: $color$alignr${exec '/home/f3bruary/.conky/scripts/ip.sh'}
+${color 828282}wlo1: $color$alignr${addr wlo1}
+${color 828282}eno1: $color$alignr${addr eno1}
+#----------------------------------------------------------------------------------------------------------------------------------------
+#					DISK/RAM/SWAP usage
+#----------------------------------------------------------------------------------------------------------------------------------------
+${color 2E70AA}${voffset 0}${hr 1}
+${color 828282}${goto 7}${voffset 35}${fs_used_perc /}%
+${color 828282}${goto 7}HOME
+${color 828282}${goto 71}${voffset -26}${fs_used_perc /media/data}%
+${color 828282}${goto 71}DATA
+${color 828282}${goto 135}${voffset -26}${memperc}%
+${color 828282}${goto 135}RAM
+${color 828282}${goto 201}${voffset -26}${fs_used_perc /media/nas/downloads}%
+${color 828282}${goto 201}NAS
+#----------------------------------------------------------------------------------------------------------------------------------------
+#					   Running processes
+#----------------------------------------------------------------------------------------------------------------------------------------
+${color 2E70AA}${voffset 2}${hr 1}
+${color #2E70AA}${voffset 5}NAME${goto 122}PID${goto 175}CPU%${alignr}MEM%$color${voffset 5}
+${top name 1}${goto 115}${top pid 1}${goto 175}${top cpu 1}${alignr}${top mem 1}
+${top name 2}${goto 115}${top pid 2}${goto 175}${top cpu 2}${alignr}${top mem 2}
+${top name 3}${goto 115}${top pid 3}${goto 175}${top cpu 3}${alignr}${top mem 3}
+${top name 5}${goto 115}${top pid 5}${goto 175}${top cpu 5}${alignr}${top mem 5}
+${top name 6}${goto 115}${top pid 6}${goto 175}${top cpu 6}${alignr}${top mem 6}
+${color 2E70AA}${voffset 2}${hr 1}${color}
+#----------------------------------------------------------------------------------------------------------------------------------------
+#					        Media
+#----------------------------------------------------------------------------------------------------------------------------------------
+${color #2E70AA}${voffset 5}UPCOMING TV SHOWS${alignr}DATE$color${voffset 5}
+${execpi 3600 ~/.conky/scripts/sonarr.sh | uniq | tail -n 10}
+${color #2E70AA}${voffset 5}UPCOMING MOVIES${alignr}DATE$color${voffset 5}
+${execpi 3600 ~/.conky/scripts/cp.sh | sort -t "-" -b -k 3 -k 2M -k1 | head -n 5 | sed -e 's/ 2015//g' -e 's/ - /\$\{alignr\}/g'}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+${font Bitstream Charter Bold:size=12:bold}${color5}SYSTEM INFO
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color1}$nodename
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color1}$sysname $kernel
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color1}Uptime: $uptime
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color1}Battery: ${color5}$battery
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color1}Load: ${loadavg 3}
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color1}Threads: $running_threads
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color1}UTC: $utime
+${voffset 24}
+${font Bitream Charter Bold:size=12:bold}${color5}MEMORY USAGE
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color4}${top_mem name
+1}${alignr}${top_mem mem 1}%
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color1}${top_mem name
+2}${alignr}${top_mem mem 2}%
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color2}${top_mem name
+3}${alignr}${top_mem mem 3}%
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color3}${top_mem name
+4}${alignr}${top_mem mem 4}%
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color3}${top_mem name
+4}${alignr}${top_mem mem 5}%
+${voffset 5}
+${color1}${offset 15}${font Bitstream Charter Bold:size=11:normal}Used: $mem 
+${color1}${offset 15}${font Bitstream Charter Bold:size=11:normal}Free: $memfree
+${voffset 20}
+${font Bitstream Charter Bold:size=12:bold}${color5}TOP CPU PROCESSES
+# Showing TOP 5 CPU-consumers
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color4}${top name
+1}${alignr}${top cpu 1}%
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color1}${top name
+2}${alignr}${top cpu 2}%
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color2}${top name
+3}${alignr}${top cpu 3}%
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color3}${top name
+4}${alignr}${top cpu 4}%
+${offset 15}${font Bitstream Charter Bold:size=11:normal}${color3}${top name
+5}${alignr}${top cpu 5}%
+${offset 15}${cpugraph 30,285 cfb45d 5b8829}${voffset -14}
+#Showing memory part with TOP 5
+${voffset 10}
+${font Bitstream Charter Bold:size=12:bold}${color5}DISK USAGE
+${offset 15}${font Bitstream Charter Bold:size=10:normal}${color1}Used:   ${font Bitstream Charter Bold:size=10:normal}${fs_used /}
+${offset 15}${font Bitstream Charter Bold:size=10:normal}${color1}Free:    ${font Bitstream Charter Bold:size=10:normal}${fs_free /}
+${offset 15}${color1}${font Bitstream Charter Bold:size=10:normal}IO:   ${diskiograph cfb45d 5b8829}${voffset -30}
+${voffset 20}
+# Network data
+${voffset 20}
+${font Bitstream Charter Bold:size=12:bold}${color5}NETWORK INFO
+${offset 15}${color1}${font Bitstream Charter Bold:size=10:normal}Up:    ${font Bitstream Charter Bold:size=10:normal}$color2${upspeed wlp2s0}
+${offset 15}${upspeedgraph wlp2s0 35,285 cfb45d 5b8829 100 -l}
+${offset 15}${color1}${font Bitstream Charter Bold:size=10:normal}Down:   ${offset 15}${font Bitstream Charter Bold:size=10:normal}$color2${downspeed wlp2s0}
+${offset 15}${downspeedgraph wlp2s0: 37,285 cfb45d 5b8829 100 -l}
+${offset 15}${color1}${font Bitstream Charter Bold:size=10:normal}${addr wlp2s0}    Signal Strength:${wireless_link_bar wlp2s0}
